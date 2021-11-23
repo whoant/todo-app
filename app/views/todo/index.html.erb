@@ -1,0 +1,36 @@
+<div class="row mt-4">
+    <div class="col-12">
+        <!--        <a href="" class="btn btn-warning">Add new todo</a>-->
+        <%= link_to "Add new todo", todo_new_path, class: 'btn btn-warning' %>
+    </div>
+    <div class="col-12 mt-2">
+        <table class="table table-bordered text-center">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Title</th>
+
+                <th>Function</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <% @todos.each_with_index do |todo, index| %>
+                <tr>
+                    <td><%= index + 1 %></td>
+                    <% if todo.status %>
+                        <td><%= todo.title %></td>
+                    <% else %>
+                        <td><s><%= todo.title %></s></td>
+                    <% end %>
+
+                    <td>
+                        <%= link_to "Edit", todo_edit_path(todo), class: 'btn btn-primary mr-2' %>
+                        <%= link_to "Delete", todo_delete_path(todo), method: :delete, data: { confirm: 'Are you sure you want to delete' }, class: 'btn btn-danger' %>
+                    </td>
+                </tr>
+            <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>
