@@ -8,14 +8,14 @@
                 </h3>
                 <div class="row">
                     <div class="col-12">
-                        <%= form_with model: @todos, url: todo_path, data: { remote: false } do |form| %>
+                        <%= form_with model: @todos, url: todo_update_path, :method => :put, data: { remote: false } do |form| %>
                             <div class="mb-3">
                                 <%= form.label :title, class: 'form-label' %>
-                                <%= form.text_field :title, class: 'form-control', placeholder: 'Title', value: @todo.title %>
+                                <%= form.text_field :title, class: 'form-control', value: @todo.title %>
                             </div>
                             <div class="mb-3">
                                 <%= form.label :status, class: 'form-label' %>
-                                <%= form.options_for_select([['Đã hoàn thành', true], ['Chưa hoàn thành', false]]) :status, class: 'form-control', placeholder: 'Status', value: @todo.title %>
+                                <%= form.select :status, options_for_select([['Complete', true], ['Incomplete', false]], { :selected => @todo.status }), :class => 'form-control' %>
                             </div>
                             <div class="mb-3">
                                 <%= form.submit 'Update', class: 'btn btn-primary' %>

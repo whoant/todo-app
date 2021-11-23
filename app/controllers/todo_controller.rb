@@ -8,7 +8,6 @@ class TodoController < ApplicationController
 	end
 
 	def create
-
 		todos = Todos.new(todos_params)
 		todos.status = true
 		if todos.save
@@ -29,12 +28,12 @@ class TodoController < ApplicationController
 	def update
 		@todo = Todos.find(params[:id])
 
-		if @todo.update_attributes(params[:todos])
+		if @todo.update_columns title: params[:title], status: params[:status]
 			flash[:notice] = 'Todo updated!'
 			redirect_to root_path
 		else
 			flash[:alert] = 'Fail to update todo'
-			render :new
+			render :edit
 		end
 	end
 
